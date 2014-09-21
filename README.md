@@ -1,6 +1,10 @@
 Getting and Cleaning Data: Course Project - run_analysis.R
 ------------------------------------------
 
+## Overview of the process
+
+![](process.jpg?raw=true)
+
 In order to execute the run_analysis.R file place the following files in the working directory together with the script:
 
 * features.txt
@@ -11,13 +15,17 @@ In order to execute the run_analysis.R file place the following files in the wor
 * Y_test.txt
 * Y_train.txt
 
+The output generated is finaltidydata.txt the contents of which meet the principles of tidy data as outlined in the paper by Hadley Wickham at http://vita.had.co.nz/papers/tidy-data.pdf.
 
+For a specific description of the tidy data file contents see the codebook.md file in the same github repository as this file.
+
+## Process walkthrough
 The run_analysis.R file contains code which does the following:
 
 ###0. Pre-processing
 Reads in the text files then brings them together according to the following diagram
 
-![](textdiagram.jpg?raw=true)
+![](textdiagram.JPG?raw=true)
 
 Source: David Hood, https://class.coursera.org/getdata-007/forum/thread?thread_id=49#comment-570
 
@@ -128,8 +136,10 @@ To read back into R Studio:
 ```{r}
 finaltidydata <- read.table("finaltidydata.txt", header=TRUE, quote="\"")
 ```
+
 ```{r}
 View(finaltidydata)
 ```
+
 
 
