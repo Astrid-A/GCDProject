@@ -1,6 +1,3 @@
----
-output: html_document
----
 Getting and Cleaning Data Project Codebook
 ----------------------------------------------------------------------
 
