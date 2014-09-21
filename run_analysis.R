@@ -8,7 +8,9 @@
 ## 4. Appropriately labels the data set with descriptive variable names. 
 ## 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+library(plyr)
 library(dplyr)
+
 
 ## 0. Prelim work
 ## Read in the pertinent files (in current working directory)
@@ -18,7 +20,7 @@ features <- read.table("features.txt")
 xtest <- read.table("X_test.txt")
 subjtest <- read.table("subject_test.txt", col.names = "subject")
 
-#use the $V2 column values in features to name the columns in xtest ie the header.
+#use the features$V2 column values to name the columns in xtest ie the header.
 #number of observations in features = number of variables in xtest
 names(xtest) <- features$V2
 
@@ -42,6 +44,7 @@ subjtrain <- read.table("subject_train.txt", col.names = "subject")
 #use the features$V2 column values to name the columns in  xtrain ie the header.
 #number of observations in features = number of variables in xtrain
 names(xtrain) <- features$V2
+
 # add the subject column from subjtest to xtrain
 mergedtraindata <- cbind(xtrain, subjtrain)
 
@@ -51,8 +54,6 @@ ytrain <- read.table("Y_train.txt", col.names = "activity")
 # add the activity train column from ytrain to the mergedtraindata
 mergedtraindata1 <- cbind(mergedtraindata, ytrain)
 
-# label this data as 'train' data by adding a 'datatype' column and setting it to "train"
-#mergedtraindata1["datatype"] <- "train"
 
 ##########################################################################################
 # 1. merge the test and train data
@@ -73,7 +74,7 @@ allmergeddata <- allmergeddata[,c(562:563, 1:561)]
 namesvector <- names(allmergeddata)
 
 # identify all those column names in namesvector that contain "-mean(" or "-std(" in their name
-# these arethe ones we want to keep
+# these are the ones we want to keep
 columnvector <- c(grep("-mean\\(", namesvector), grep("-std\\(", namesvector))
 
 # combine the first 2 columns with those listed in columnvector to  produce desired dataframe
